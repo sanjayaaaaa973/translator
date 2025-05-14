@@ -1,0 +1,98 @@
+/* 1.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #dbeafe, #e0e7ff);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+}
+
+.text-input textarea {
+  width: 100%;
+  height: 80px;
+  resize: none;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.controls .row {
+  display: flex;
+  align-items: center;
+}
+
+.controls select {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.controls .exchange ion-icon {
+  font-size: 20px;
+  color: #4f46e5;
+  cursor: pointer;
+}
+
+.icons ion-icon {
+  font-size: 18px;
+  margin: 0 6px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.to-text {
+  width: 100%;
+  height: 80px;
+  resize: none;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin-top: 8px;
+  font-size: 15px;
+  background-color: #3b82f6;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2563eb;
+}

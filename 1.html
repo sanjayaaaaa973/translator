@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Language Translator</title>
+  <link rel="stylesheet" href="1.css">
+</head>
+<body>
+  <div class="container">
+    <div class="wrapper">
+      <div class="text-input">
+        <textarea spellcheck="false" class="from-text" placeholder="enter text you need to translate"></textarea>
+        <ul class="controls">
+          <li class="row from">
+            <div class="icons">
+              <ion-icon id="from" name="volume-medium-outline"></ion-icon>
+              <ion-icon id="from" name="copy-outline"></ion-icon>
+            </div>
+            <select id="from-lang"></select>
+          </li>
+          <li class="exchange">
+            <ion-icon name="swap-vertical"></ion-icon>
+          </li>
+          <li class="row to">
+            <select id="to-lang"></select>
+            <div class="icons">
+              <ion-icon id="to" name="volume-medium-outline"></ion-icon>
+              <ion-icon id="to" name="copy-outline"></ion-icon>
+            </div>
+          </li>
+        </ul>
+        <textarea spellcheck="false" readonly disabled class="to-text" placeholder="Translation"></textarea>
+      </div>
+    </div>
+    <button id="translate-btn">Translate it</button>
+    <br><br><br>
+    <button id="view-history-btn">View All Details</button>
+    <br><br><br>
+    <button id="home-btn">Go to Home</button> 
+  </div>
+
+  <script>
+    const languages = {
+      "en-GB": "English",
+      "fr-FR": "French",
+      "es-ES": "Spanish",
+      "de-DE": "German",
+      "hi-IN": "Hindi",
+    };
+
+    const fromText = document.querySelector(".from-text"),
+          toText = document.querySelector(".to-text"),
+          exchangeIcon = document.querySelector(".exchange"),
+          selectTag = document.querySelectorAll("select"),
+          translateBtn = document.getElementById("translate-btn"),
+          viewHistoryBtn = document.getElementById("view-history-btn"),
+          homeBtn = document.getElementById("home-btn"); 
+    selectTag.forEach((tag, id) => {
+      for (let lang_code in languages) {
+        let selected = id == 0 ? (lang_code == "en-GB" ? "selected" : "") : (lang_code == "fr-FR" ? "selected" : "");
+        let option = `<option ${selected} value="${lang_code}">${languages[lang_code]}</option>`;
+        tag.insertAdjacentHTML("beforeend", option);
+      }
+    });
+
+    translateBtn.addEventListener("click", () => {
+      let text = fromText.value.trim(),
+          translateFrom = selectTag[0].value,  
+          translateTo = selectTag[1].value;    
+
+      if (!text) return;
+      toText.setAttribute("placeholder", "Translating...");
+      let apiUrl = `https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
+
+      fetch(apiUrl)
+        .then((res) => res.json())
+        .then((data) => {
+          let translation = data.responseData.translatedText;
+          toText.value = translation;
+          saveHistory(text, translation, translateFrom, translateTo);  
+          toText.setAttribute("placeholder", "Translation");
+        });
+    });
+
+    function saveHistory(original, translated, fromLang, toLang) {
+      const history = JSON.parse(localStorage.getItem("translationHistory") || "[]");
+      history.push({ original, translated, fromLang, toLang });
+      localStorage.setItem("translationHistory", JSON.stringify(history));
+    }
+
+    viewHistoryBtn.addEventListener("click", () => {
+      window.location.href = "history.html"; 
+    });
+
+    homeBtn.addEventListener("click", () => {
+      window.location.href = "index.php";  
+    });
+
+  </script>
+</body>
+</html>
+

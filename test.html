@@ -1,0 +1,55 @@
+<html>
+<head>
+    <style>
+       
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 100vh; 
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Styling for the Start Testing Mode button */
+.testing-button {
+    background-color: rgb(125, 125, 235); /* Matching primary color */
+    border: none;
+    color: white;
+    padding: 12px 0;
+    width: 50%;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect */
+.testing-button:hover {
+    background-color: #07001f; /* Darker background on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+    transform: scale(1.05); /* Slight enlarge effect */
+}
+
+
+    </style>
+</head>
+<div class="button-container">
+    <button class="testing-button" onclick="startTestingMode()">Start Testing Mode</button>
+</div>
+<script>
+    function startTestingMode() {
+        window.location.href = "1.html";
+    }
+</script>
+
+</html>
+
+

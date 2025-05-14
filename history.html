@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Translation History</title>
+  <link rel="stylesheet" href="1.css">
+</head>
+<body>
+  <div class="container">
+    <h3><strong>Translation History</strong></h3>
+    <ul id="historyList"></ul>
+    <button onclick="goBack()">Go Back</button>
+  </div>
+
+  <script>
+    function loadHistory() {
+      const list = document.getElementById("historyList");
+      const history = JSON.parse(localStorage.getItem("translationHistory")) || [];
+
+      list.innerHTML = "";
+
+      history.forEach((entry, index) => {
+        const item = document.createElement("li");
+        item.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <div>
+              <strong>Original:</strong> ${entry.original} <br>
+              <strong>Translated:</strong> ${entry.translated}
+            </div>
+            <button style="background-color: #ef4444;" onclick="deleteEntry(${index})">Delete</button>
+          </div>
+          <hr>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function deleteEntry(index) {
+      let history = JSON.parse(localStorage.getItem("translationHistory")) || [];
+      history.splice(index, 1);
+      localStorage.setItem("translationHistory", JSON.stringify(history));
+      loadHistory(); // Refresh the list
+    }
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+
+    window.onload = loadHistory;
+  </script>
+</body>
+</html>
